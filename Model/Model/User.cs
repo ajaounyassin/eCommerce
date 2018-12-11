@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Model.Model
@@ -13,8 +15,9 @@ namespace Model.Model
         public Profil Profil { get; set; }
         public string Mail { get; set; }
         public string Password { get; set; }
-        public Sexe Sexe { get; set; }
+        public Sexe Sexe { get; set; } 
         public Address Address { get; set; }
+        public ICollection<Article> ArticleSale { get; set; }
 
     }
 }

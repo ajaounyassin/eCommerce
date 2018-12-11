@@ -7,7 +7,7 @@ namespace Model.Model
     public class Article
     {
         public Guid Id { get; set; }
-        public Guid VendorId { get; set; }
+        public User Vendor { get; set; }
         public string Wording { get; set; }
         public string Description { get; set; }
         public string Picture { get; set; }
@@ -17,6 +17,5 @@ namespace Model.Model
         public int DeliveryTime { get; set; }
         public bool Active { get; set; }
         public bool Top { get; set; }
-
     }
 }

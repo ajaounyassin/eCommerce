@@ -11,10 +11,10 @@ namespace Repositories.Interfaces
         Address Add(Address address);
 
         //Read
-        List<Address> GetAddress(Guid userId);
+        Address GetAddress(User user);
 
         //Update
-        Address Update(Guid userId, Address address);    
+        Address Update(User user, Address address);    
 
         //Delete
         bool Delete(Guid id);
