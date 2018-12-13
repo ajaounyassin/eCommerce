@@ -50,25 +50,6 @@ namespace Model
 
             modelBuilder.Entity<User>().HasOne(p => p.Profil);
             modelBuilder.Entity<User>().HasOne(s => s.Sexe);
-           // modelBuilder.Entity<User>().HasOne(a => a.Address);
-
-
-
-            //RELATION 1..O 1
-            //modelBuilder.Entity<User>().HasOptional(s => s.Address).WithRequired(ad => ad.User);
-
-            //modelBuilder.Entity<Article>().HasMany(u => u.ArticleSale).WithOne(ar => ar.Vendor);
-
-
-            //modelBuilder.Entity<Person>()
-            //    .HasMany(bc => bc.DirectedMovies)
-            //    .WithOne(x => x.Director)
-            //    ;
-
-            //modelBuilder.Entity<Student>()
-            //.HasOne<Grade>(s => s.Grade)
-            //.WithMany(g => g.Students)
-            //.HasForeignKey(s => s.CurrentGradeId);
         }
     }
 }

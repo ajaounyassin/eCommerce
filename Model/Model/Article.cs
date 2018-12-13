@@ -12,6 +12,7 @@ namespace Model.Model
         public string Description { get; set; }
         public string Picture { get; set; }
         public decimal PriceET { get; set; }
+        public Category Category { get; set; }
         public Tax Tax { get; set; }
         public int Quantity { get; set; }
         public int DeliveryTime { get; set; }
