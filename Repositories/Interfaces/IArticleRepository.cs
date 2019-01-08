@@ -8,7 +8,7 @@ namespace Repositories.Interfaces
     public interface IArticleRepository
     {
         //Create 
-        Article Add(Article address);
+        Article Add(Article article);
 
         //Read
         List<Article> GetArticles(string recherche);

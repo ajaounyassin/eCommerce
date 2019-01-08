@@ -13,6 +13,7 @@ namespace Model.Model
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public Profil Profil { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string Mail { get; set; }
         public string Password { get; set; }
         public Sexe Sexe { get; set; } 

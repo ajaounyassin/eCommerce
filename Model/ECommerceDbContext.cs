@@ -10,7 +10,7 @@ namespace Model
     {
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Article> Articles { get; set; }
-        public virtual DbSet<Basket> Baskets { get; set; }
+        public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
         public ECommerceDbContext()
@@ -38,8 +38,8 @@ namespace Model
             modelBuilder.Entity<Article>().HasOne(u => u.Vendor).WithMany(a => a.ArticleSale);
             modelBuilder.Entity<Article>().HasOne(t => t.Tax);
 
-            modelBuilder.Entity<Basket>().HasOne(u => u.Buyer);
-            modelBuilder.Entity<Basket>().HasMany(u => u.Articles);
+            modelBuilder.Entity<ShoppingCart>().HasOne(u => u.Buyer);
+            modelBuilder.Entity<ShoppingCart>().HasMany(u => u.Articles);
 
             modelBuilder.Entity<Comment>().HasOne(a => a.Article);
             modelBuilder.Entity<Comment>().HasOne(u => u.User);

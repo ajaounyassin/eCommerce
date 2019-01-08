@@ -11,7 +11,7 @@ namespace Repositories.Repositories
         private readonly ECommerceDbContext _context;
         public AddressRepository(ECommerceDbContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         //Create
@@ -25,7 +25,7 @@ namespace Repositories.Repositories
         //Read
         public Address GetAddress(User user)
         {
-            return this._context.Addresses.Find(user);
+            return _context.Addresses.Find(user);
 
         }
 
@@ -47,10 +47,7 @@ namespace Repositories.Repositories
                 _context.SaveChanges();
                 return newM.Entity;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         //Delete
@@ -58,14 +55,11 @@ namespace Repositories.Repositories
         {
             if (this._context.Addresses.Find(id) != null)
             {
-                _context.Addresses.Remove(this._context.Addresses.Find(id));
+                _context.Addresses.Remove(_context.Addresses.Find(id));
                 _context.SaveChanges();
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
     }

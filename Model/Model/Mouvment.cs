@@ -3,9 +3,9 @@ namespace Model.Model
 {
     public class Mouvment
     {
-        private Guid Id { get; set; }
-        private Article Article { get; set; }
-        private int Quantity { get; set; }
-        private DateTime Date { get; set; }
+        public Guid Id { get; set; }
+        public Article Article { get; set; }
+        public int Quantity { get; set; }
+        public DateTime Date { get; set; }
     }
 }

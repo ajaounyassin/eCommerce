@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model.Model
 {
-    public class Basket
+    public class ShoppingCart
     {
         public Guid Id { get; set; }
         public User Buyer { get; set; }
