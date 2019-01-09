@@ -12,6 +12,7 @@ namespace Model
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Movement> Movements { get; set; }
 
         public ECommerceDbContext()
         {
@@ -49,7 +50,8 @@ namespace Model
             modelBuilder.Entity<Order>().HasOne(s => s.Status);
 
             modelBuilder.Entity<User>().HasOne(p => p.Profil);
-            modelBuilder.Entity<User>().HasOne(s => s.Sexe);
+
+            modelBuilder.Entity<Movement>().HasOne(a => a.Article);
         }
     }
 }

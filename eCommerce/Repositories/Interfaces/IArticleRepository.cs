@@ -19,7 +19,7 @@ namespace Repositories.Interfaces
         Article Update(Guid articleId, Article article);
         Article ActiveArticle(Guid articleId, bool active);
         Article TopArticle(Guid articleId, bool top);
-        Article UpdateQuantityArticle(Guid articleId, int quantity);
+        Movement UpdateQuantityArticle(Movement movement);
         Article UpdatePrice(Guid articleId, decimal priceET);
         Article UpdatePicture(Guid articleId, string picture);
 

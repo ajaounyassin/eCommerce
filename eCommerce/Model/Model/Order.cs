@@ -13,6 +13,6 @@ namespace Model.Model
         public DateTime OrderDate { get; set; }
         public DateTime EstimatedDeliveryDate { get; set; }
         public Status Status { get; set; }
-        public bool Payement { get; set; }
+        public bool Payment { get; set; }
     }
 }

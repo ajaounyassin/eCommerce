@@ -19,6 +19,11 @@ namespace Model.Model
         public Sexe Sexe { get; set; } 
         public Address Address { get; set; }
         public ICollection<Article> ArticleSale { get; set; }
-
+        public enum Sex
+        {
+            Male,
+            Female,
+            Other,
+        };
     }
 }

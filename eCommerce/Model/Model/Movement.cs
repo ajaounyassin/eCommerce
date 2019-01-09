@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Model.Model
 {
-    public class Mouvment
+    public class Movement
     {
         public Guid Id { get; set; }
         public Article Article { get; set; }
