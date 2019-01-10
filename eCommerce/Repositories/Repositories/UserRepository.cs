@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Model;
+using Model.Model;
+using Repositories.Interfaces;
 
 namespace Repositories.Repositories
 {
@@ -6,29 +11,29 @@ namespace Repositories.Repositories
     {
         private readonly ECommerceDbContext _context;
 
-        public ShoppingCartRepository(ECommerceDbContext context)
+        public UserRepository(ECommerceDbContext context)
         {
             this._context = context;
         }
 
         //Create
-        User Add(User user)
+        public User Add(User user)
         {
             _context.Users.Add(user);
             _context.SaveChanges();
             return user;
         }
 
-        //Read
-        List<User> GetUserByFName(string UserFirstName);
-        List<User> GetUserByLName(string UserLastName);
-        List<User> GetUserByAddress(Address UserAddress);
+        ////Read
+        //public List<User> GetUserByFName(string UserFirstName);
+        //public List<User> GetUserByLName(string UserLastName);
+        //public List<User> GetUserByAddress(Address UserAddress);
 
-        //Update
-        User Update(Guid userId, User user);
+        ////Update
+        //public User Update(Guid userId, User user);
 
         //Delete
-        bool Delete(Guid id)
+        public bool Delete(Guid id)
         {
             if (this._context.Users.Find(id) != null)
             {
@@ -39,5 +44,13 @@ namespace Repositories.Repositories
 
             return false;
         }
+
+        public void CreateUser(User user)
+        {
+            _context.Users.Add(user);
+            _context.SaveChanges();
+        
+        }
+
     }
 }

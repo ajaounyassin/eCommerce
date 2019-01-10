@@ -6,6 +6,13 @@ using System.Text;
 
 namespace Model.Model
 {
+    public enum Sex
+    {
+        Male,
+        Female,
+        Other,
+    };
+
     public class User
     {
         public Guid Id { get; set; }
@@ -16,14 +23,9 @@ namespace Model.Model
         [DataType(DataType.EmailAddress)]
         public string Mail { get; set; }
         public string Password { get; set; }
-        public Sexe Sexe { get; set; } 
         public Address Address { get; set; }
         public ICollection<Article> ArticleSale { get; set; }
-        public enum Sex
-        {
-            Male,
-            Female,
-            Other,
-        };
+        public Sex Sex { get; set; }
+
     }
 }

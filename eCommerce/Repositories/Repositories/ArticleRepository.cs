@@ -90,7 +90,7 @@ namespace Repositories.Repositories
 
             if (newA.Entity.Id == movement.Article.Id)
             {
-                _context.Mouvments.Add(movement);
+                _context.Movements.Add(movement);
                 _context.SaveChanges();
                 return movement;
             }

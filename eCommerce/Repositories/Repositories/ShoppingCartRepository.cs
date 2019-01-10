@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using Model;
 using Model.Model;
 using Repositories.Interfaces;

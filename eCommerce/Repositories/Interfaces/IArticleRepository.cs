@@ -13,7 +13,7 @@ namespace Repositories.Interfaces
         //Read
         List<Article> GetArticles(string recherche);
         List<Article> GetArticles();
-        int GetQuantity(Guid article);
+        //int GetQuantity(Guid article);
 
         //Update
         Article Update(Guid articleId, Article article);
