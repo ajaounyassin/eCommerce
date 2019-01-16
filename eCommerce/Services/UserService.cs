@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using eCommerce.Repositories.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Model.Model;
-using Repositories.Repositories;
+using Repositories.Interfaces;
 
 public class UserService : IUserService
 {
-    // users hardcoded for simplicity, store in a db with hashed passwords in production applications
+
+    private readonly IUserRepository _userRepository;
+
+
     private List<User> _users = new List<User>
         {
             new User { Id = Guid.NewGuid(), FirstName = "Test", LastName = "User", Password = "test" }
@@ -28,11 +32,45 @@ public class UserService : IUserService
         return user;
     }
 
-    public User CreateUser(User user)
-    { 
-        _users.Add(user);
+    public User Create(User user)
+    {
+        user.Password = encrypt(user.Password);
+        return _userRepository.Add(user);
+    }
 
-        return user;
+    public bool Delete(User user)
+    {
+        return _userRepository.Delete(user.Id);
+    }
+
+    private string encrypt(string word)
+    {
+        if (word == null)
+        {
+            word = string.Empty;
+        }
+
+        var passwordBytes = Encoding.UTF8.GetBytes(word);
+        passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+        return Convert.ToBase64String(passwordBytes);
     }
 }
+
+//    private String decrypt(String word)
+//    {
+
+//    if (word == null)
+//    {
+//        word = String.Empty;
+//    }
+
+//    var passwordBytes = Convert.FromBase64String(word);
+
+//    passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+
+//    var bytesDecrypted = Cipher.Decrypt(bytesToBeDecrypted, passwordBytes);
+
+//    return Encoding.UTF8.GetString(bytesDecrypted);
+
+//}
 

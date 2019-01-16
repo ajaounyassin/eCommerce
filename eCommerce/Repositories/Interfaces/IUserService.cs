@@ -8,8 +8,9 @@ namespace eCommerce.Repositories.Interfaces
     public interface IUserService
     {
         Task<User> Authenticate(string firstname, string password);
-        User CreateUser(User user);
-        
+        User Create(User user);
+        bool Delete(User user);
+
     }
 
 }
