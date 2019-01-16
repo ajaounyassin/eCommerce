@@ -11,7 +11,7 @@ namespace Repositories.Interfaces
 
         //Read
         User GetOne(string mail);
-        bool CheckExist(User user);
+        bool CheckExist(string mail, string password);
         List<User> GetAll();
 
         //Delete

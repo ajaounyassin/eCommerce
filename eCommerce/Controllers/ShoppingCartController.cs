@@ -17,8 +17,9 @@ namespace eCommerce.Controllers
 
         // POST: /Basket/AddToBasket
         [HttpPost]
-        public async Task<IActionResult> AddToBasket(Article article, ShoppingCart shoppingCart)
+        public async Task<IActionResult> Add(Article article, ShoppingCart shoppingCart, int quantity)
         {
+             //await _shoppingCartService.AddArticle(shoppingCart, article, quantity);
 
 
 

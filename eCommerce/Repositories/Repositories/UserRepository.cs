@@ -26,15 +26,15 @@ namespace Repositories.Repositories
         }
 
         //Read
-        public User GetOne(String mail)
+        public User GetOne(string mail)
         {
             User user = _context.Users.SingleOrDefault(x => x.Mail == mail);
             return user;
         }
 
-        public bool CheckExist(User user)
+        public bool CheckExist(string mail, string password)
         {
-            User userDB = this._context.Users.SingleOrDefault(x => x.Mail == user.Mail);
+            User userDB = this._context.Users.SingleOrDefault(x => x.Mail == mail && x.Password == password);
             return (userDB == null) ;
         }
 

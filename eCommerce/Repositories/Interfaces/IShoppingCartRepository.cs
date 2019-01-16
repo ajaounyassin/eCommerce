@@ -8,10 +8,10 @@ namespace Repositories.Interfaces
     public interface IShoppingCartRepository
     {
         //Create
-        ShoppingCart AddArticle(ShoppingCart shoppingCartId, Article article);
+        ShoppingCart AddArticle(ShoppingCart shoppingCart, Article article, int quantity);
         
         //Read
-        List<Article> ListArticles(ShoppingCart shoppingCart);
+        ICollection<Article> ListArticles(ShoppingCart shoppingCart);
 
 
         //Update
@@ -21,5 +21,7 @@ namespace Repositories.Interfaces
 
         //Delete
         bool DeleteArticle(Guid shoppingCartId, Article article);
+        bool Delete(ShoppingCart shoppingCart);
+
     }
 }

@@ -14,21 +14,14 @@ public class UserService : IUserService
     private readonly IUserRepository _userRepository;
 
 
-    private List<User> _users = new List<User>
-        {
-            new User { Id = Guid.NewGuid(), FirstName = "Test", LastName = "User", Password = "test" }
-        };
+    //private List<User> _users = new List<User>
+        //{
+        //    new User { Id = Guid.NewGuid(), FirstName = "Test", LastName = "User", Password = "test" }
+        //};
 
-    public async Task<User> Authenticate(string firstname, string password)
+    public async Task<bool> Authenticate(string mail, string password)
     {
-        var user = await Task.Run(() => _users.SingleOrDefault(x => x.FirstName == firstname && x.Password == password));
-
-        // return null if user not found
-        if (user == null)
-            return null;
-
-        // authentication successful so return user details without password
-        user.Password = null;
+        var user = await Task.Run(() => _userRepository.CheckExist(mail, encrypt(password)));
         return user;
     }
 

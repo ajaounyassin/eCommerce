@@ -18,15 +18,16 @@ namespace Repositories.Repositories
         //Create
         public ShoppingCart AddArticle(ShoppingCart shoppingCart, Article article)
         {
-            _context.ShoppingCarts.Add(shoppingCart);
+            shoppingCart.Articles.Add(article);
+            _context.ShoppingCarts.Update(shoppingCart);
             _context.SaveChanges();
             return shoppingCart;
         }
 
         //Read
-        public List<Article> ListArticles(ShoppingCart shoppingCart)
+        public ICollection<Article> ListArticles(ShoppingCart shoppingCart)
         {
-            return null;
+            return shoppingCart.Articles;
 
         }
 
