@@ -11,22 +11,27 @@ namespace eCommerce.Services
 
         public ShoppingCart AddArticle(ShoppingCart sc, Article article, int quantity)
         {
-            throw new NotImplementedException();
+            return _shoppingCartRepository.AddArticle(sc, article, quantity);
         }
 
-        public void DeleteArticle(Article article)
+        public bool DeleteArticle(ShoppingCart sc, Article article)
         {
-            throw new NotImplementedException();
+            return _shoppingCartRepository.Delete(sc, article);
         }
 
-        public void DeleteShoppingCart(ShoppingCart sc)
+        public bool DeleteShoppingCart(ShoppingCart sc)
         {
-            throw new NotImplementedException();
-        }
+            var id = sc.Id;
+            _shoppingCartRepository.Delete(sc);
 
-        public List<Article> GetAllArticles(ShoppingCart sc)
+            return _shoppingCartRepository.Find(sc);
+
+         }
+
+        public ICollection<Article> GetAllArticles(ShoppingCart sc)
         {
-            throw new NotImplementedException();
+            return _shoppingCartRepository.ListArticles(sc);
+
         }
 
         public bool Delete(ShoppingCart shoppingCart)

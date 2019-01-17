@@ -6,9 +6,9 @@ namespace eCommerce.Services
     public interface IShoppingCartService
     {
         ShoppingCart AddArticle(ShoppingCart sc, Article article, int quantity);
-        void DeleteArticle(Article article);
-        void DeleteShoppingCart(ShoppingCart sc);
-        List<Article> GetAllArticles(ShoppingCart sc);
+        bool DeleteArticle(ShoppingCart sc, Article article);
+        bool DeleteShoppingCart(ShoppingCart sc);
+        ICollection<Article> GetAllArticles(ShoppingCart sc);
     }
 }
 

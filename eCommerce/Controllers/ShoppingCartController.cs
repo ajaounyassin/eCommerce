@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Threading.Tasks;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -17,22 +18,31 @@ namespace eCommerce.Controllers
 
         // POST: /Basket/AddToBasket
         [HttpPost]
-        public async Task<IActionResult> Add(Article article, ShoppingCart shoppingCart, int quantity)
+        public Task<ShoppingCart> Add(Article article, ShoppingCart shoppingCart, int quantity)
         {
-             //await _shoppingCartService.AddArticle(shoppingCart, article, quantity);
+            var sc = await Task.Run (() => _shoppingCartService.AddArticle(shoppingCart, article, quantity));
+            return sc;
+        }
 
+        [HttpGet]
+        public ICollection<Article> GetArticles(ShoppingCart shoppingCart)
+        {
+            var articles = _shoppingCartService.GetAllArticles(shoppingCart);
+            return articles;
+        }
 
+        [HttpDelete]
+        public Task<ShoppingCart> DeleteCart(ShoppingCart shoppingCart)
+        {
+            var done = await Task.Run(() => _shoppingCartService.DeleteShoppingCart(shoppingCart));
+            return done;
+        }
 
-
-            //if (productDetails?.Id == null)
-            //{
-            //    return RedirectToAction("Index", "Catalog");
-            //}
-            //var basketViewModel = await GetBasketViewModelAsync();
-
-            //await _basketService.AddItemToBasket(basketViewModel.Id, productDetails.Id, productDetails.Price, 1);
-
-            //return RedirectToAction("Index");
+        [HttpDelete]
+        public Task<ShoppingCart> DeleteArticle(ShoppingCart shoppingCart, Article article)
+        {
+            var done = await Task.Run(() => _shoppingCartService.DeleteArticle(shoppingCart, article));
+            return done;
         }
     }
 }
