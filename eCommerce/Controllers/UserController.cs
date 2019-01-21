@@ -45,7 +45,7 @@ namespace eCommerce.Controllers
         public IActionResult Delete([FromBody] User user)
         {
 
-            return Ok(_userService.Delete(user));
+            return NoContent();
 
         }
     }
