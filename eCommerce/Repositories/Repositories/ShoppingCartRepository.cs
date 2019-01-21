@@ -30,7 +30,7 @@ namespace Repositories.Repositories
             return shoppingCart.Articles;
         }
 
-        bool Find(ShoppingCart shoppingCart)
+        public bool Find(ShoppingCart shoppingCart)
         {
             if (_context.ShoppingCarts.Find(shoppingCart) is null)
             {
@@ -65,5 +65,19 @@ namespace Repositories.Repositories
             return false;
         }
 
+        public bool Delete(ShoppingCart shoppingCart)
+        {
+            if (_context.ShoppingCarts.Find(shoppingCart) != null)
+            {
+                _context.ShoppingCarts.Remove(_context.ShoppingCarts.Find(shoppingCart.Id));
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+
+        }
+
     }
+
+
 }

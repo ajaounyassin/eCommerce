@@ -11,7 +11,7 @@ namespace eCommerce.Services
 
         public ShoppingCart AddArticle(ShoppingCart sc, Article article, int quantity)
         {
-            return _shoppingCartRepository.AddArticle(sc, article, quantity);
+            return _shoppingCartRepository.AddArticle(sc, article);
         }
 
         public bool DeleteArticle(ShoppingCart sc, Article article)

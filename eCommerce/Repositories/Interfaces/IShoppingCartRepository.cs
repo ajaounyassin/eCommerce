@@ -8,7 +8,7 @@ namespace Repositories.Interfaces
     public interface IShoppingCartRepository
     {
         //Create
-        ShoppingCart AddArticle(ShoppingCart shoppingCart, Article article, int quantity);
+        ShoppingCart AddArticle(ShoppingCart shoppingCart, Article article);
         
         //Read
         ICollection<Article> ListArticles(ShoppingCart shoppingCart);
