@@ -9,16 +9,13 @@ namespace Repositories.Interfaces
         //Create
         User Add(User user);
 
-        ////Read
-        //List<User> GetUserByFName(string UserFirstName);
-        //List<User> GetUserByLName(string UserLastName);
-        //List<User> GetUserByAddress(Address UserAddress);
-
-        ////Update
-        //User Update(Guid userId, User user);
+        //Read
+        User GetOne(string mail);
+        bool CheckExist(string mail, string password);
+        List<User> GetAll();
 
         //Delete
         bool Delete(Guid id);
-        void CreateUser(User user);
+
     }
 }

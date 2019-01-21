@@ -13,6 +13,12 @@ namespace Model.Model
         Other,
     };
 
+    public enum Profil
+    {
+        Vendor,
+        Buyer
+    };
+
     public class User
     {
         public Guid Id { get; set; }

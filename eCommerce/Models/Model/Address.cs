@@ -8,7 +8,10 @@ namespace Model.Model
 {
     public class Address
     {
+        public Guid Id { get; set; }
+        [ForeignKey("UserForeignKey")]
         public User User { get; set; }
+
         [Required]
         public int? Number { get; set; }
         [Required]

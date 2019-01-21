@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
+using System.Threading.Tasks;
 using eCommerce.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,23 +13,21 @@ namespace eCommerce.Controllers
 
     public class UserController : ControllerBase
     {
+        private SHA256CryptoServiceProvider SHA256;
+        private readonly UserService _userService;
 
-        private readonly IUserService _userService;
-
-        public UserController(IUserService userService)
+        public UserController(UserService userService)
         {
-            _userService = userService;
+            _userService = (UserService)userService;
         }
 
-        // POST api/values
         [HttpPost("create")]
-        public IActionResult NewUser([FromBody] User user)
+        public IActionResult New([FromBody] User user)
         {
-            _userService.CreateUser(user);
+            _userService.Create(user);
             return Ok(user);
             
         }
-
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
@@ -40,6 +39,14 @@ namespace eCommerce.Controllers
                 return BadRequest(new { message = "Username or password is incorrect" });
 
             return Ok(user);
+        }
+
+        [HttpDelete("delete")]
+        public IActionResult Delete([FromBody] User user)
+        {
+
+            return Ok(_userService.Delete(user));
+
         }
     }
 }

@@ -18,17 +18,26 @@ namespace Repositories.Repositories
         //Create
         public ShoppingCart AddArticle(ShoppingCart shoppingCart, Article article)
         {
-            _context.ShoppingCarts.Add(shoppingCart);
+            shoppingCart.Articles.Add(article);
+            _context.ShoppingCarts.Update(shoppingCart);
             _context.SaveChanges();
             return shoppingCart;
         }
 
         //Read
-        public List<Article> ListArticles(ShoppingCart shoppingCart)
+        public ICollection<Article> ListArticles(ShoppingCart shoppingCart)
         {
-            return null;
-
+            return shoppingCart.Articles;
         }
+
+        bool Find(ShoppingCart shoppingCart)
+        {
+            if (_context.ShoppingCarts.Find(shoppingCart) is null)
+            {
+                return false;
+            }
+            return true;
+        } 
 
         //Update
         public ShoppingCart Update(Guid basketId, ShoppingCart ShoppingCart)
@@ -38,12 +47,21 @@ namespace Repositories.Repositories
 
         public int GetQuantity(ShoppingCart shoppingCart)
         {
-            return 0;
+            return shoppingCart.Articles.Count;
         }
 
         //Delete
-        public bool DeleteArticle(Guid shoppingCartId, Article article)
+        public bool DeleteArticle(ShoppingCart shoppingCart, Article article)
         {
+            var quantity = shoppingCart.Articles.Count;
+            shoppingCart.Articles.Remove(article);
+
+            if (quantity != shoppingCart.Articles.Count)
+            {
+                _context.ShoppingCarts.Update(shoppingCart);
+                _context.SaveChanges();
+                return true;
+            }
             return false;
         }
 
