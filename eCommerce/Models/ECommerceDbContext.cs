@@ -34,6 +34,8 @@ namespace Model
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<User>().HasOne(p => p.Address).WithOne(i => i.User);
+
             modelBuilder.Entity<Address>().HasOne(u => u.User).WithOne(a => a.Address);
 
             modelBuilder.Entity<Article>().HasOne(u => u.Vendor).WithMany(a => a.ArticleSale);
@@ -48,8 +50,6 @@ namespace Model
             modelBuilder.Entity<Order>().HasOne(b => b.Basket);
             modelBuilder.Entity<Order>().HasOne(u => u.Client);
             modelBuilder.Entity<Order>().HasOne(s => s.Status);
-
-            modelBuilder.Entity<User>().HasOne(p => p.Profil);
 
             modelBuilder.Entity<Movement>().HasOne(a => a.Article);
         }

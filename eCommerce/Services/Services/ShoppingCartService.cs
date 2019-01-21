@@ -16,7 +16,7 @@ namespace eCommerce.Services
 
         public bool DeleteArticle(ShoppingCart sc, Article article)
         {
-            return _shoppingCartRepository.Delete(sc, article);
+            return _shoppingCartRepository.DeleteArticle(sc, article);
         }
 
         public bool DeleteShoppingCart(ShoppingCart sc)

@@ -21,6 +21,7 @@ namespace Repositories.Repositories
         public User Add(User user)
         {
             _context.Users.Add(user);
+            _context.Addresses.Add(user.Address);
             _context.SaveChanges();
             return user;
         }

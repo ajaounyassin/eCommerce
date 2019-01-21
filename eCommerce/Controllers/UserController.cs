@@ -14,11 +14,11 @@ namespace eCommerce.Controllers
     public class UserController : ControllerBase
     {
         private SHA256CryptoServiceProvider SHA256;
-        private readonly IUserService _userService;
+        private readonly UserService _userService;
 
-        public UserController(IUserService userService)
+        public UserController(UserService userService)
         {
-            _userService = userService;
+            _userService = (UserService)userService;
         }
 
         [HttpPost("create")]
