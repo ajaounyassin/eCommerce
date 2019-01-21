@@ -26,7 +26,7 @@ namespace Model
         {
             if(!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("server=localhost;port3306;database=eCommerceDb;uid=root;password=root");
+                optionsBuilder.UseMySql("server=localhost;port=3306;database=eCommerceDb;uid=root;password=root");
             }
         }
 

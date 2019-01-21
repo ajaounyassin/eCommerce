@@ -5,17 +5,22 @@ using System.Threading.Tasks;
 using eCommerce.Repositories.Interfaces;
 using Model.Model;
 using Repositories.Interfaces;
+using Repositories.Repositories;
 
 public class UserService : IUserService
 {
 
-    private readonly IUserRepository _userRepository;
+    private readonly UserRepository _userRepository;
 
+    public UserService(IUserRepository repo)
+    {
+        _userRepository = (UserRepository)repo;
+    }
 
     //private List<User> _users = new List<User>
-        //{
-        //    new User { Id = Guid.NewGuid(), FirstName = "Test", LastName = "User", Password = "test" }
-        //};
+    //{
+    //    new User { Id = Guid.NewGuid(), FirstName = "Test", LastName = "User", Password = "test" }
+    //};
 
     public async Task<bool> Authenticate(string mail, string password)
     {

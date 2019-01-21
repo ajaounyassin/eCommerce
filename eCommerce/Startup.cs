@@ -30,11 +30,11 @@ namespace eCommerce
                 options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
                 options.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
-
             });
             services.AddDbContext<ECommerceDbContext>(Options => Options.UseMySql(Configuration.GetConnectionString("ECommerceDb")));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddSession();
 
         }
 

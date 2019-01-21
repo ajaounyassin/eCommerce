@@ -14,9 +14,9 @@ namespace eCommerce.Controllers
     public class UserController : ControllerBase
     {
         private SHA256CryptoServiceProvider SHA256;
-        private readonly IUserService _userService;
+        private IUserService _userService;
 
-        public UserController(UserService userService)
+        public UserController(IUserService userService)
         {
             _userService = (UserService)userService;
         }
