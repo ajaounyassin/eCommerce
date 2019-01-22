@@ -9,7 +9,6 @@ using Repositories.Repositories;
 
 public class UserService : IUserService
 {
-
     private readonly UserRepository _userRepository;
 
     public UserService(IUserRepository repo)

@@ -33,19 +33,14 @@ namespace Repositories.Repositories
             return _context.Articles.ToList();
         }
 
-        /*public int GetQuantity(Guid article)
-        {
-            
-        }*/
-
         //Update
-        public Article Update(Guid articleId, Article article)
+        public Article Update(Article article)
         {
-            var old = _context.Articles.Find(articleId);
+            var old = _context.Articles.Find(article.Id);
             var newA = _context.Articles.Update(old);
 
 
-            if (newA.Entity.Id == articleId)
+            if (newA.Entity.Id == article.Id)
             {
                 newA.Entity.Active = article.Active;
                 newA.Entity.Wording = article.Wording;

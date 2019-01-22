@@ -16,7 +16,7 @@ namespace Repositories.Interfaces
         //int GetQuantity(Guid article);
 
         //Update
-        Article Update(Guid articleId, Article article);
+        Article Update(Article article);
         Article ActiveArticle(Guid articleId, bool active);
         Article TopArticle(Guid articleId, bool top);
         Movement UpdateQuantityArticle(Movement movement);

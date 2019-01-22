@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using eCommerce.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -25,12 +23,12 @@ namespace eCommerce.Controllers
             return sc;
         }
 
-        //[HttpGet]
-        //public ICollection<Article> GetArticles(ShoppingCart shoppingCart)
-        //{
-        //    var articles = _shoppingCartService.GetAllArticles(shoppingCart);
-        //    return articles;
-        //}
+        [HttpGet]
+        public ICollection<Article> GetArticles(ShoppingCart shoppingCart)
+        {
+            var articles = _shoppingCartService.GetAllArticles(shoppingCart);
+            return articles;
+        }
 
         [HttpDelete]
         public async Task<ShoppingCart> DeleteCart(ShoppingCart shoppingCart)
