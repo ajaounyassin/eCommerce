@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using eCommerce.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Model.Model;
 using Repositories.Interfaces;
@@ -10,6 +11,7 @@ namespace eCommerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors]
 
     public class UserController : ControllerBase
     {

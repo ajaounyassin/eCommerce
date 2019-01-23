@@ -30,7 +30,10 @@ public class UserService : IUserService
     public User Create(User user)
     {
         user.Password = encrypt(user.Password);
-        return _userRepository.Add(user);
+        if(_userRepository.CheckExist(user.Mail) == false)
+            return _userRepository.Add(user);
+
+        return null;
     }
 
     public bool Delete(User user)

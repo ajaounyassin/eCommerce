@@ -39,6 +39,11 @@ namespace Repositories.Repositories
             return (userDB == null) ;
         }
 
+        public bool CheckExist(string mail)
+        {
+            User userDB = this._context.Users.SingleOrDefault(x => x.Mail == mail);
+            return (userDB == null);
+        }
 
         public List<User> GetAll()
         {
