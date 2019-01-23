@@ -29,14 +29,14 @@ public class UserService : IUserService
 
     public User Create(User user)
     {
-        if (user == null)
-        {
+        //if (user == null)
+        //{
             if (_userRepository.CheckExist(user.Mail) == false)
             {
                 user.Password = encrypt(user.Password);
                 return _userRepository.Add(user);
             }
-        }
+        //}
         return (User)null;
     }
 
