@@ -11,7 +11,7 @@ namespace eCommerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors]
+    [EnableCors("eCommercePolicy")]
 
     public class UserController : ControllerBase
     {

@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model.Model;
 using Moq;
 using Repositories.Interfaces;
+using Repositories.Repositories;
 
 namespace eCommerceTests
 {
@@ -17,6 +18,7 @@ namespace eCommerceTests
 
         public UserServiceTester()
         {
+            _userRepository = new UserRepository(null);
             _userService = new UserService(_userRepository);
         }
 

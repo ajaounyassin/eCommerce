@@ -9,11 +9,11 @@ using Repositories.Repositories;
 
 public class UserService : IUserService
 {
-    private readonly UserRepository _userRepository;
+    private readonly IUserRepository _userRepository;
 
     public UserService(IUserRepository repo)
     {
-        _userRepository = (UserRepository)repo;
+        _userRepository = repo;
     }
 
     //private List<User> _users = new List<User>
@@ -30,10 +30,10 @@ public class UserService : IUserService
     public User Create(User user)
     {
         user.Password = encrypt(user.Password);
-        if(_userRepository.CheckExist(user.Mail) == false)
+        /*if(_userRepository.CheckExist(user.Mail) == false)*/
             return _userRepository.Add(user);
 
-        return null;
+        /*return null;*/
     }
 
     public bool Delete(User user)
