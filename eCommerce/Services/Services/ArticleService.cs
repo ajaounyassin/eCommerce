@@ -8,15 +8,19 @@ namespace eCommerce.Services
 {
     public class ArticleService : IArticleService
     {
-        private readonly ArticleRepository _articleRepository;
+        private readonly IArticleRepository _articleRepository;
+        private readonly IUserRepository _userRepository;
 
-        public ArticleService(IArticleRepository repo)
+        public ArticleService(IArticleRepository arRepo, IUserRepository usRepo)
         {
-            _articleRepository = (ArticleRepository)repo;
+            _articleRepository = arRepo;
+            _userRepository = usRepo;
         }
 
-        public Article Create(Article article)
+        public Article Create(Article article,string emailVendor)
         {
+            var user = _userRepository.GetOne(emailVendor);
+            article.Vendor = user;
             return _articleRepository.Add(article);
         }
 

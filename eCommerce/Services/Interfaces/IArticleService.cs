@@ -6,7 +6,7 @@ namespace eCommerce.Services.Interfaces
 {
     public interface IArticleService
     {
-        Article Create(Article article);
+        Article Create(Article article, string emailVendor);
         bool Delete(Article article);
         Article Update(Article article);
         List<Article> GetAll();

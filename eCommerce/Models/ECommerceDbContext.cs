@@ -39,7 +39,6 @@ namespace Model
             modelBuilder.Entity<Address>().HasOne(u => u.User).WithOne(a => a.Address);
 
             modelBuilder.Entity<Article>().HasOne(u => u.Vendor).WithMany(a => a.ArticleSale);
-            modelBuilder.Entity<Article>().HasOne(t => t.Tax);
 
             modelBuilder.Entity<ShoppingCart>().HasOne(u => u.Buyer);
             modelBuilder.Entity<ShoppingCart>().HasMany(u => u.Articles);

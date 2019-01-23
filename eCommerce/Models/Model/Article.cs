@@ -12,10 +12,10 @@ namespace Model.Model
         public string Description { get; set; }
         public string Picture { get; set; }
         public decimal PriceET { get; set; }
-        public Category Category { get; set; }
-        public Tax Tax { get; set; }
+        public string Category { get; set; }
+        public decimal Tax { get; set; }
         public int Quantity { get; set; }
-        public int DeliveryTime { get; set; }
+        public DateTime DeliveryTime { get; set; }
         public bool Active { get; set; }
         public bool Top { get; set; }
     }

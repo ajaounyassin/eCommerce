@@ -21,9 +21,9 @@ namespace eCommerce.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult Add(Article article)
+        public IActionResult Add(Article article, [FromBody]string emailVendor)
         {
-            var ar = _articleService.Create(article);
+            var ar = _articleService.Create(article,emailVendor);
             return Ok(ar);
         }
 

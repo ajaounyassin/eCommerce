@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eCommerce.Migrations
@@ -8,20 +7,6 @@ namespace eCommerce.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Category",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Category", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Status",
                 columns: table => new
@@ -32,19 +17,6 @@ namespace eCommerce.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Status", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Tax",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Rate = table.Column<double>(nullable: false),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Tax", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -118,10 +90,10 @@ namespace eCommerce.Migrations
                     Description = table.Column<string>(nullable: true),
                     Picture = table.Column<string>(nullable: true),
                     PriceET = table.Column<decimal>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: true),
-                    TaxId = table.Column<Guid>(nullable: true),
+                    Category = table.Column<string>(nullable: true),
+                    Tax = table.Column<decimal>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
-                    DeliveryTime = table.Column<int>(nullable: false),
+                    DeliveryTime = table.Column<DateTime>(nullable: false),
                     Active = table.Column<bool>(nullable: false),
                     Top = table.Column<bool>(nullable: false),
                     ShoppingCartId = table.Column<Guid>(nullable: true)
@@ -130,21 +102,9 @@ namespace eCommerce.Migrations
                 {
                     table.PrimaryKey("PK_Articles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Articles_Category_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Articles_ShoppingCarts_ShoppingCartId",
                         column: x => x.ShoppingCartId,
                         principalTable: "ShoppingCarts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Articles_Tax_TaxId",
-                        column: x => x.TaxId,
-                        principalTable: "Tax",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -245,19 +205,9 @@ namespace eCommerce.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Articles_CategoryId",
-                table: "Articles",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Articles_ShoppingCartId",
                 table: "Articles",
                 column: "ShoppingCartId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Articles_TaxId",
-                table: "Articles",
-                column: "TaxId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Articles_VendorId",
@@ -321,13 +271,7 @@ namespace eCommerce.Migrations
                 name: "Status");
 
             migrationBuilder.DropTable(
-                name: "Category");
-
-            migrationBuilder.DropTable(
                 name: "ShoppingCarts");
-
-            migrationBuilder.DropTable(
-                name: "Tax");
 
             migrationBuilder.DropTable(
                 name: "Users");

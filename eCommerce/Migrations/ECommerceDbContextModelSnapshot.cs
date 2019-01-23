@@ -53,9 +53,9 @@ namespace eCommerce.Migrations
 
                     b.Property<bool>("Active");
 
-                    b.Property<int?>("CategoryId");
+                    b.Property<string>("Category");
 
-                    b.Property<int>("DeliveryTime");
+                    b.Property<DateTime>("DeliveryTime");
 
                     b.Property<string>("Description");
 
@@ -67,7 +67,7 @@ namespace eCommerce.Migrations
 
                     b.Property<Guid?>("ShoppingCartId");
 
-                    b.Property<Guid?>("TaxId");
+                    b.Property<decimal>("Tax");
 
                     b.Property<bool>("Top");
 
@@ -77,29 +77,11 @@ namespace eCommerce.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.HasIndex("ShoppingCartId");
-
-                    b.HasIndex("TaxId");
 
                     b.HasIndex("VendorId");
 
                     b.ToTable("Articles");
-                });
-
-            modelBuilder.Entity("Model.Model.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("Model.Model.Comment", b =>
@@ -202,20 +184,6 @@ namespace eCommerce.Migrations
                     b.ToTable("Status");
                 });
 
-            modelBuilder.Entity("Model.Model.Tax", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<double>("Rate");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tax");
-                });
-
             modelBuilder.Entity("Model.Model.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -249,17 +217,9 @@ namespace eCommerce.Migrations
 
             modelBuilder.Entity("Model.Model.Article", b =>
                 {
-                    b.HasOne("Model.Model.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
-
                     b.HasOne("Model.Model.ShoppingCart")
                         .WithMany("Articles")
                         .HasForeignKey("ShoppingCartId");
-
-                    b.HasOne("Model.Model.Tax", "Tax")
-                        .WithMany()
-                        .HasForeignKey("TaxId");
 
                     b.HasOne("Model.Model.User", "Vendor")
                         .WithMany("ArticleSale")
