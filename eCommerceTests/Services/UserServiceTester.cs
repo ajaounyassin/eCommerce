@@ -47,8 +47,9 @@ namespace eCommerceTests
             mock.Setup(u => u.Add(It.IsAny<User>())).Returns(user);
 
             var service = new UserService(mock.Object);
-            var dbuser = service.Create(user);
-            Assert.IsTrue(user==null);
+            var dbuser = service.Create(null);
+
+            Assert.IsTrue(dbuser is null);
         }
     }
 }

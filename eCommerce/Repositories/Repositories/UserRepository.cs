@@ -35,13 +35,13 @@ namespace Repositories.Repositories
 
         public bool CheckExist(string mail, string password)
         {
-            User userDB = this._context.Users.SingleOrDefault(x => x.Mail == mail && x.Password == password);
+            User userDB = _context.Users.SingleOrDefault(x => x.Mail == mail && x.Password == password);
             return (userDB == null) ;
         }
 
         public bool CheckExist(string mail)
         {
-            User userDB = this._context.Users.SingleOrDefault(x => x.Mail == mail);
+            User userDB = _context.Users.SingleOrDefault(x => x.Mail == mail);
             return (userDB == null);
         }
 

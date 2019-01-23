@@ -26,18 +26,20 @@ namespace eCommerce.Controllers
         [HttpPost("create")]
         public IActionResult New([FromBody] User user)
         {
-            _userService.Create(user);
-            return Ok(user);
+            if (_userService.Create(user) is null)
+                return BadRequest();
+
+            return CreatedAtAction("create",user);
             
         }
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody]User userParam)
+        public async Task<IActionResult> Authenticate(string mail, string password)
         {
-            var user = await _userService.Authenticate(userParam.FirstName, userParam.Password);
+            var user = await _userService.Authenticate(mail, password);
 
-            if (user == null)
+            if (user == false)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
             return Ok(user);

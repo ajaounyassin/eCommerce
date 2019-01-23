@@ -23,17 +23,17 @@ public class UserService : IUserService
 
     public async Task<bool> Authenticate(string mail, string password)
     {
-        var user = await Task.Run(() => _userRepository.CheckExist(mail, encrypt(password)));
-        return user;
+        var exist = await Task.Run(() => _userRepository.CheckExist(mail, encrypt(password)));
+        return exist;
     }
 
     public User Create(User user)
     {
         user.Password = encrypt(user.Password);
-        /*if(_userRepository.CheckExist(user.Mail) == false)*/
+        if(_userRepository.CheckExist(user.Mail) == false)
             return _userRepository.Add(user);
 
-        /*return null;*/
+        return (User)null;
     }
 
     public bool Delete(User user)
