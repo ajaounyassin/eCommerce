@@ -27,22 +27,22 @@ namespace eCommerce.Controllers
         public IActionResult New([FromBody] User user)
         {
             if (_userService.Create(user) is null)
-                return BadRequest();
+                return BadRequest(new { message = "E-Mail already used" });
 
-            return CreatedAtAction("create",user);
+            return StatusCode(200,"User Created successfully");
             
         }
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Authenticate(string mail, string password)
+        public IActionResult Authenticate([FromBody]User user)
         {
-            var user = await _userService.Authenticate(mail, password);
+            var exist =  _userService.Authenticate(user.Mail, user.Password);
 
-            if (user == false)
-                return BadRequest(new { message = "Username or password is incorrect" });
+            if (exist)
+                return Ok(exist);
 
-            return Ok(user);
+            return BadRequest(new { message = "Username or password is incorrect" });
         }
 
         [HttpDelete("delete")]

@@ -21,9 +21,9 @@ public class UserService : IUserService
     //    new User { Id = Guid.NewGuid(), FirstName = "Test", LastName = "User", Password = "test" }
     //};
 
-    public async Task<bool> Authenticate(string mail, string password)
+    public bool Authenticate(string mail, string password)
     {
-        var exist = await Task.Run(() => _userRepository.CheckExist(mail, encrypt(password)));
+        var exist = _userRepository.CheckExist(mail, encrypt(password));
         return exist;
     }
 
@@ -32,8 +32,8 @@ public class UserService : IUserService
         user.Password = encrypt(user.Password);
         if(_userRepository.CheckExist(user.Mail) == false)
             return _userRepository.Add(user);
-
-        return (User)null;
+        else
+            return (User)null;
     }
 
     public bool Delete(User user)
