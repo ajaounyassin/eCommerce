@@ -1,11 +1,8 @@
-﻿using System.Security.Cryptography;
-using System.Threading.Tasks;
-using eCommerce.Repositories.Interfaces;
+﻿using eCommerce.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Model.Model;
-using Repositories.Interfaces;
 
 namespace eCommerce.Controllers
 {
@@ -15,7 +12,6 @@ namespace eCommerce.Controllers
 
     public class UserController : ControllerBase
     {
-        private SHA256CryptoServiceProvider SHA256;
         private IUserService _userService;
 
         public UserController(IUserService userService)
@@ -37,7 +33,7 @@ namespace eCommerce.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]User user)
         {
-            var exist =  _userService.Authenticate(user.Mail, user.Password);
+            var exist = _userService.Authenticate(user.Mail, user.Password);
 
             if (exist)
                 return Ok(exist);

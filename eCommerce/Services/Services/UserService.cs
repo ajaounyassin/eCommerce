@@ -29,11 +29,15 @@ public class UserService : IUserService
 
     public User Create(User user)
     {
-        user.Password = encrypt(user.Password);
-        if(_userRepository.CheckExist(user.Mail) == false)
-            return _userRepository.Add(user);
-        else
-            return (User)null;
+        if (user == null)
+        {
+            if (_userRepository.CheckExist(user.Mail) == false)
+            {
+                user.Password = encrypt(user.Password);
+                return _userRepository.Add(user);
+            }
+        }
+        return (User)null;
     }
 
     public bool Delete(User user)

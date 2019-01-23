@@ -30,26 +30,38 @@ namespace eCommerceTests
             {
                 FirstName = "Ajaoun",
                 LastName = "Yassin",
-                BirthDate =DateTime.Now,
-                Profil = Profil.Buyer, 
+                BirthDate = DateTime.Now,
+                Profil = Profil.Buyer,
                 Mail = "ajaoun.yassin@gmail.com",
                 Password = "password",
-                Address = new Address() {
-                    Number= 50,
+                Address = new Address()
+                {
+                    Number = 50,
                     Street = "Rue de la Horace",
                     PostCode = "67200",
                     City = "Horace",
                     Country = "France"
                 },
-            Sex = Sex.Female
+                Sex = Sex.Female
             };
 
-            mock.Setup(u => u.Add(It.IsAny<User>())).Returns(user);
+            mock.Setup(u => u.Add(user));
 
             var service = new UserService(mock.Object);
-            var dbuser = service.Create(null);
+            var dbuser = service.Create(user);
 
             Assert.IsTrue(dbuser is null);
+        }
+
+        [TestMethod]
+        public void GivenNullUser_WhenCreateNewUser_ThenReturnNull()
+        {
+            var mock = new Mock<IUserRepository>();
+
+            var service = new UserService(mock.Object);
+            var dbuser = service.Create(new User());
+
+            Assert.IsNull(dbuser);
         }
     }
 }

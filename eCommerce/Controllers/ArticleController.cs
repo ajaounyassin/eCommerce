@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using eCommerce.Services;
 using eCommerce.Services.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Model.Model;
 
@@ -11,6 +9,8 @@ namespace eCommerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("eCommercePolicy")]
+
     public class ArticleController : ControllerBase
     {
         private IArticleService _articleService;
