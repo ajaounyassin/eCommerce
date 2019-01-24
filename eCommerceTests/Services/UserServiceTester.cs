@@ -14,18 +14,21 @@ namespace eCommerceTests
 
         private IUserService _userService;
         private IUserRepository _userRepository;
+        private IShoppingCartRepository _shoppingCartRepository;
 
 
         public UserServiceTester()
         {
             _userRepository = new UserRepository(null);
-            _userService = new UserService(_userRepository);
+            _shoppingCartRepository = new ShoppingCartRepository(null);
+            _userService = new UserService(_userRepository, _shoppingCartRepository);
         }
 
         [TestMethod]
         public void GivenUserAlreadyInDb_WhenCreateNewUser_ThenReturnNull()
         {
             var mock = new Mock<IUserRepository>();
+            var mockSc = new Mock<IShoppingCartRepository>();
             var user = new User()
             {
                 FirstName = "Ajaoun",
@@ -47,7 +50,7 @@ namespace eCommerceTests
 
             mock.Setup(u => u.Add(user));
 
-            var service = new UserService(mock.Object);
+            var service = new UserService(mock.Object,mockSc.Object);
             var dbuser = service.Create(user);
 
             Assert.IsNull(dbuser);
@@ -57,10 +60,11 @@ namespace eCommerceTests
         public void GivenNullUser_WhenCreateNewUser_ThenReturnNull()
         {
             var mock = new Mock<IUserRepository>();
+            var mockSc = new Mock<IShoppingCartRepository>();
 
             mock.Setup((x => x.Add(It.IsAny<User>()))).Returns(new User());
 
-            var service = new UserService(mock.Object);
+            var service = new UserService(mock.Object, mockSc.Object);
             var dbuser = service.Create(new User());
 
             Assert.IsNull(dbuser);
@@ -70,6 +74,7 @@ namespace eCommerceTests
         public void GivenUser_WhenCreateNewUser_ThenReturnUser()
         {
             var mock = new Mock<IUserRepository>();
+            var mockSc = new Mock<IShoppingCartRepository>();
             var user = new User()
             {
                 FirstName = "Ajaoun",
@@ -91,7 +96,7 @@ namespace eCommerceTests
 
             mock.Setup((x => x.Add(It.IsAny<User>()))).Returns(user);
 
-            var service = new UserService(mock.Object);
+            var service = new UserService(mock.Object,mockSc.Object);
             var dbuser = service.Create(user);
 
             Assert.AreEqual(user,dbuser);

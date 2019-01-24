@@ -41,6 +41,16 @@ namespace eCommerce.Controllers
             return BadRequest(new { message = "Username or password is incorrect" });
         }
 
+        [HttpGet("GetOne/{email}", Name = "GetOne")]
+        public IActionResult GetOne(string email)
+        {
+            var user = _userService.GetOne(email);
+            if (user is null)
+                return NotFound();
+
+            return Ok(user);
+        }
+
         [HttpDelete("delete")]
         public IActionResult Delete([FromBody] User user)
         {

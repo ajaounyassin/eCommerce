@@ -15,7 +15,14 @@ namespace Repositories.Repositories
             this._context = context;
         }
 
-        //Create
+        public ShoppingCart CreateCart(ShoppingCart shoppingCart, User user)
+        {
+            shoppingCart.Buyer = user;
+            _context.ShoppingCarts.Add(shoppingCart);
+            _context.SaveChanges();
+            return shoppingCart;
+        }
+
         public ShoppingCart AddArticle(ShoppingCart shoppingCart, Article article)
         {
             shoppingCart.Articles.Add(article);
@@ -23,8 +30,7 @@ namespace Repositories.Repositories
             _context.SaveChanges();
             return shoppingCart;
         }
-
-        //Read
+ 
         public ICollection<Article> ListArticles(ShoppingCart shoppingCart)
         {
             return shoppingCart.Articles;
@@ -38,8 +44,7 @@ namespace Repositories.Repositories
             }
             return true;
         } 
-
-        //Update
+  
         public ShoppingCart Update(Guid basketId, ShoppingCart ShoppingCart)
         {
             return null;
@@ -50,7 +55,6 @@ namespace Repositories.Repositories
             return shoppingCart.Articles.Count;
         }
 
-        //Delete
         public bool DeleteArticle(ShoppingCart shoppingCart, Article article)
         {
             var quantity = shoppingCart.Articles.Count;

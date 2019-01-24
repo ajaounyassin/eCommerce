@@ -1,4 +1,6 @@
 ﻿using eCommerce.Repositories.Interfaces;
+using eCommerce.Services;
+using eCommerce.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +40,10 @@ namespace eCommerce
             services.AddDbContext<ECommerceDbContext>(Options => Options.UseMySql(Configuration.GetConnectionString("ECommerceDb")));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<IArticleRepository, ArticleRepository>();
+            services.AddScoped<IShoppingCartService, ShoppingCartService>();
+            services.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
             services.AddSession();
 
         }

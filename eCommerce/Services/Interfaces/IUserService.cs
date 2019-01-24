@@ -7,6 +7,7 @@ namespace eCommerce.Repositories.Interfaces
     {
         bool Authenticate(string firstname, string password);
         User Create(User user);
+        User GetOne(string email);
         bool Delete(User user);
 
     }

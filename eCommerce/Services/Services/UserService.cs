@@ -10,10 +10,12 @@ using Repositories.Repositories;
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IShoppingCartRepository _shoppingCartRepository;
 
-    public UserService(IUserRepository repo)
+    public UserService(IUserRepository usRepo, IShoppingCartRepository _scRepo)
     {
-        _userRepository = repo;
+        _userRepository = usRepo;
+        _shoppingCartRepository = _scRepo;
     }
 
     public bool Authenticate(string mail, string password)
@@ -29,9 +31,24 @@ public class UserService : IUserService
             if (_userRepository.CheckExist(user.Mail) == false)
             {
                 user.Password = Encrypt(user.Password);
-                return _userRepository.Add(user);
+                var userdb = _userRepository.Add(user);
+                var sc = _shoppingCartRepository.CreateCart(new ShoppingCart(), user);
+                return userdb;
             }
         }
+        return null;
+    }
+
+    public User GetOne(string email)
+    {
+        if (!string.IsNullOrEmpty(email))
+        {
+            var user = _userRepository.GetOne(email);
+            user.Password = null;
+            return user;
+        }
+
+
         return null;
     }
 

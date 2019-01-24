@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Model.Model;
 using Repositories.Interfaces;
@@ -8,6 +9,11 @@ namespace eCommerce.Services
     public class ShoppingCartService : IShoppingCartService
     {
         private readonly IShoppingCartRepository _shoppingCartRepository;
+
+        public ShoppingCartService(IShoppingCartRepository _scRepo)
+        {
+            _shoppingCartRepository = _scRepo;
+        }
 
         public ShoppingCart AddArticle(ShoppingCart sc, Article article, int quantity)
         {
