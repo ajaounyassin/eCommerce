@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using eCommerce.Services;
 using eCommerce.Services.Interfaces;
 using Microsoft.AspNetCore.Cors;
@@ -21,10 +22,13 @@ namespace eCommerce.Controllers
         }
 
         [HttpPost("create")]
-        public IActionResult Add(Article article, [FromBody]string emailVendor)
+        public IActionResult Add(Article article, string emailVendor)
         {
-            var ar = _articleService.Create(article,emailVendor);
-            return Ok(ar);
+            var ar = _articleService.Create(article, emailVendor);
+            if (ar is null)
+                return BadRequest(new {message = "User Vendor error"});
+
+                return Ok(ar);
         }
 
         [HttpGet("getall")]

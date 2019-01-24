@@ -19,9 +19,16 @@ namespace eCommerce.Services
 
         public Article Create(Article article,string emailVendor)
         {
-            var user = _userRepository.GetOne(emailVendor);
-            article.Vendor = user;
-            return _articleRepository.Add(article);
+            if (emailVendor == "" || emailVendor is null)
+            {
+                return null;
+            }
+            else
+            {
+                var user = _userRepository.GetOne(emailVendor);
+                article.Vendor = user;
+                return _articleRepository.Add(article);
+            }
         }
 
         public bool Delete(Article article)

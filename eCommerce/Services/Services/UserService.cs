@@ -16,28 +16,23 @@ public class UserService : IUserService
         _userRepository = repo;
     }
 
-    //private List<User> _users = new List<User>
-    //{
-    //    new User { Id = Guid.NewGuid(), FirstName = "Test", LastName = "User", Password = "test" }
-    //};
-
     public bool Authenticate(string mail, string password)
     {
-        var exist = _userRepository.CheckExist(mail, encrypt(password));
+        var exist = _userRepository.CheckExist(mail, Encrypt(password));
         return exist;
     }
 
     public User Create(User user)
     {
-        if (user == null)
+        if (!string.IsNullOrEmpty(user.Mail))
         {
             if (_userRepository.CheckExist(user.Mail) == false)
             {
-                user.Password = encrypt(user.Password);
+                user.Password = Encrypt(user.Password);
                 return _userRepository.Add(user);
             }
         }
-        return (User)null;
+        return null;
     }
 
     public bool Delete(User user)
@@ -45,7 +40,7 @@ public class UserService : IUserService
         return _userRepository.Delete(user.Id);
     }
 
-    private string encrypt(string word)
+    private string Encrypt(string word)
     {
         if (word == null)
         {
@@ -57,22 +52,4 @@ public class UserService : IUserService
         return Convert.ToBase64String(passwordBytes);
     }
 }
-
-//    private String decrypt(String word)
-//    {
-
-//    if (word == null)
-//    {
-//        word = String.Empty;
-//    }
-
-//    var passwordBytes = Convert.FromBase64String(word);
-
-//    passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
-
-//    var bytesDecrypted = Cipher.Decrypt(bytesToBeDecrypted, passwordBytes);
-
-//    return Encoding.UTF8.GetString(bytesDecrypted);
-
-//}
 

@@ -50,7 +50,7 @@ namespace eCommerceTests
             var service = new UserService(mock.Object);
             var dbuser = service.Create(user);
 
-            Assert.IsTrue(dbuser is null);
+            Assert.IsNull(dbuser);
         }
 
         [TestMethod]
@@ -58,10 +58,43 @@ namespace eCommerceTests
         {
             var mock = new Mock<IUserRepository>();
 
+            mock.Setup((x => x.Add(It.IsAny<User>()))).Returns(new User());
+
             var service = new UserService(mock.Object);
             var dbuser = service.Create(new User());
 
             Assert.IsNull(dbuser);
+        }
+
+        [TestMethod]
+        public void GivenUser_WhenCreateNewUser_ThenReturnUser()
+        {
+            var mock = new Mock<IUserRepository>();
+            var user = new User()
+            {
+                FirstName = "Ajaoun",
+                LastName = "Yassin",
+                BirthDate = DateTime.Now,
+                Profil = Profil.Buyer,
+                Mail = "ajaoun.yassin@gmail.com",
+                Password = "password",
+                Address = new Address()
+                {
+                    Number = 50,
+                    Street = "Rue de la Horace",
+                    PostCode = "67200",
+                    City = "Horace",
+                    Country = "France"
+                },
+                Sex = Sex.Female
+            };
+
+            mock.Setup((x => x.Add(It.IsAny<User>()))).Returns(user);
+
+            var service = new UserService(mock.Object);
+            var dbuser = service.Create(user);
+
+            Assert.AreEqual(user,dbuser);
         }
     }
 }
