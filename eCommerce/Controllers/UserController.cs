@@ -25,7 +25,7 @@ namespace eCommerce.Controllers
             if (_userService.Create(user) is null)
                 return BadRequest(new { message = "E-Mail already used" });
 
-            return StatusCode(200,"User Created successfully");
+            return Ok();
             
         }
 

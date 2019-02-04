@@ -9,7 +9,7 @@ using Model;
 namespace eCommerce.Migrations
 {
     [DbContext(typeof(ECommerceDbContext))]
-    [Migration("20190123222644_init")]
+    [Migration("20190124123942_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
