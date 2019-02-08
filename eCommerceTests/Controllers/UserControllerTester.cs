@@ -12,10 +12,9 @@ namespace eCommerceTests.Controllers
     [TestClass]
     public class UserControllerTester : ControllerBase
     {
-        private UserController _userController;
-        private IUserService _userService;
         User user = new User()
         {
+            Id = Guid.NewGuid(),
             FirstName = "Ajaoun",
             LastName = "Yassin",
             BirthDate = DateTime.Now,
@@ -35,14 +34,41 @@ namespace eCommerceTests.Controllers
 
 
         [TestMethod]
-        public void TestCreateUser_WhenUserIsNull_ThenReturnBadRequest()
+        public void TestCreateUser_WhenUserIsNull_ThenReturnStatusCode400()
         {
             var mock = new Mock<IUserService>();
             mock.Setup(x => x.Create(new User())).Returns((User)null);
             var controller = new UserController(mock.Object);
+            BadRequestObjectResult badRequest = new BadRequestObjectResult(ModelState);
 
-            var result = controller.New(new User());
-            Assert.AreEqual(400, result);
+            var result = controller.New(new User()) as BadRequestObjectResult;
+            Assert.AreEqual(badRequest.StatusCode, result.StatusCode);
+
+        }
+
+        [TestMethod]
+        public void TestCreateUser_WhenUserIsOk_ThenReturnStatusCode200()
+        {
+            var mock = new Mock<IUserService>();
+            mock.Setup(x => x.Create(user)).Returns(user);
+            var controller = new UserController(mock.Object);
+            OkResult OkRequest = new OkResult();
+
+            var result = controller.New(user) as OkResult;
+            Assert.AreEqual(OkRequest.StatusCode, result.StatusCode);
+
+        }
+
+        [TestMethod]
+        public void TestdeleteUser_WhenUserOk_ThenReturnStatusCode204()
+        {
+            var mock = new Mock<IUserService>();
+            mock.Setup(x => x.Delete(user)).Returns(true);
+            var controller = new UserController(mock.Object);
+            NoContentResult noContentResult = new NoContentResult();
+
+            var result = controller.Delete(user) as NoContentResult;
+            Assert.AreEqual(noContentResult.StatusCode, result.StatusCode);
 
         }
     }

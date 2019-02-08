@@ -16,7 +16,7 @@ namespace eCommerce.Controllers
 
         public UserController(IUserService userService)
         {
-            _userService = (UserService)userService;
+            _userService = userService;
         }
 
         [HttpPost("create")]
